@@ -112,51 +112,36 @@ $(document).ready(initialize);
 
 
 
-//define AJAX function
-function jQueryAjax(){
-    //basic jQuery ajax method
-    $.ajax("data/MegaCities.geojson", {
-        dataType: "json",
-        success: callback
-    });
-};
 
-//define callback function
-function callback(response){
-   var mydata = response;
 
-    //pass data to another function
-    nextFunction(mydata);
-};
-
-function nextFunction(data){
-
-    console.log(data); //contains response data held by mydata in callback
-};
-
-$(document).ready(jQueryAjax);
 
 //define callback function
 function debugCallback(response){
-	
+	//check the data
+	concole.log(mydata);
+	//add 'GeoJSON data' and data for variable 'mydata' in string
 	$(mydiv).append('GeoJSON data: ' + JSON.stringify(mydata));
 };
 //define AJAX function
 function debugAjax(){
 	//define a variable to hold the data 
 	var mydata;
-	////basic jQuery ajax method
+	//basic jQuery ajax method
 	$.ajax("data/MegaCities.geojson", {
 		dataType: "json",
 		success: function(response){
+			mydata = response;
 			
-			debugCallback(mydata);
 			//check the data
-			$(mydiv).append('GeoJSON data: ' + JSON.stringify(mydata));
+			console.log(mydata);
+			//add 'GeoJSON data' and data for variable 'mydata' in string
+			$('#mydiv').append('GeoJSON data: ' + JSON.stringify(mydata));
 		}
 	});
 	//check the data
-	$(mydiv).append('<br>GeoJSON data:<br>' + JSON.stringify(mydata));
+	console.log(mydata);
+	
 };
-
+//call the debugAjax function when the document has loaded	
+$(document).ready(debugAjax);
 
